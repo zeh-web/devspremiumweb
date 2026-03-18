@@ -68,13 +68,15 @@
         body.performance-mode .weapon-card,
         body.performance-mode .settings-card,
         body.performance-mode .perk-card,
-        body.performance-mode .guide-card {
+        body.performance-mode .guide-card,
+        body.performance-mode .fov-card {
             transform: none !important;
             box-shadow: none !important;
         }
         body.performance-mode .weapon-card:hover,
         body.performance-mode .settings-card:hover,
-        body.performance-mode .perk-card:hover {
+        body.performance-mode .perk-card:hover,
+        body.performance-mode .fov-card:hover {
             border-color: var(--primary);
         }
         .bg-grid {
@@ -1025,6 +1027,12 @@
                 width: 36px;
                 height: 36px;
             }
+            .fov-grid {
+                grid-template-columns: 1fr !important;
+            }
+            .fov-value {
+                font-size: 3rem !important;
+            }
         }
         @media (max-width: 480px) {
             .weapons-grid {
@@ -1152,7 +1160,147 @@
             0% { transform: scale(0.88); opacity: 0; }
             100% { transform: scale(1); opacity: 1; }
         }
+
+        /* FOV Section Styles */
+        .fov-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem 4rem;
+        }
+        .fov-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .fov-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .fov-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        .fov-card:hover::before {
+            transform: scaleX(1);
+        }
+        .fov-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 50px rgba(255, 62, 62, 0.15);
+        }
+        .fov-card.active {
+            border-color: var(--primary);
+            box-shadow: 0 0 30px rgba(255, 62, 62, 0.2), inset 0 0 30px rgba(255, 62, 62, 0.05);
+        }
+        .fov-card.active::before {
+            transform: scaleX(1);
+        }
+        .fov-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: white;
+            box-shadow: 0 10px 30px rgba(255, 62, 62, 0.3);
+            position: relative;
+        }
+        .fov-icon::after {
+            content: '';
+            position: absolute;
+            inset: -5px;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+            opacity: 0.3;
+            animation: fovPulse 2s ease-in-out infinite;
+        }
+        @keyframes fovPulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.1); opacity: 0; }
+        }
+        .fov-value {
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--text) 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            letter-spacing: -2px;
+        }
+        .fov-label {
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+        .fov-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+        }
+        .fov-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+        .fov-tag {
+            padding: 0.4rem 1rem;
+            background: var(--surface);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        .fov-tag i {
+            font-size: 0.75rem;
+            color: var(--primary);
+        }
+        .fov-recommended {
+            position: absolute;
+            top: 1rem;
+            right: -2.5rem;
+            background: var(--accent);
+            color: #000;
+            padding: 0.25rem 3rem;
+            font-size: 0.7rem;
+            font-weight: 800;
+            transform: rotate(45deg);
+            z-index: 10;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
     </style>
+<base target="_blank">
 </head>
 <body>
     <div class="bg-grid"></div>
@@ -1397,6 +1545,44 @@
             </div>
         </div>
     </section>
+
+    <section id="fov">
+        <h2 class="section-title">
+            <i class="fas fa-expand"></i>
+            Field of View
+        </h2>
+       
+        <div class="fov-section">
+            <div class="fov-grid">
+                <div class="fov-card" onclick="selectFOV(this, 90)">
+                    <div class="fov-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <div class="fov-value">90</div>
+                    <div class="fov-label">FOV RANGE</div>
+                    <p class="fov-desc">sakto lang, pero kulang pa rin para makita mong wala ka sa future niya</p>
+                    <div class="fov-tags">
+                        <span class="fov-tag"><i class="fas fa-balance-scale"></i> Balanced</span>
+                        <span class="fov-tag"><i class="fas fa-user"></i>good for aggressive player</span>
+                    </div>
+                </div>
+                <div class="fov-card active" onclick="selectFOV(this, 100)">
+                    <div class="fov-recommended">Recommended</div>
+                    <div class="fov-icon">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                    </div>
+                    <div class="fov-value">100</div>
+                    <div class="fov-label">FOV FPP</div>
+                    <p class="fov-desc">para mas lumawak vision mo and makita mo na hindi ka niya love</p>
+                    <div class="fov-tags">
+                        <span class="fov-tag"><i class="fas fa-trophy"></i> Competitive</span>
+                        <span class="fov-tag"><i class="fas fa-star"></i> Pro</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="guide">
         <h2 class="section-title">
             <i class="fas fa-book"></i>
@@ -1526,6 +1712,11 @@
             navigator.clipboard.writeText(currentAttachCode).then(() => {
                 showToast('Attachment code copied!');
             });
+        }
+        function selectFOV(card, fovValue) {
+            document.querySelectorAll('.fov-card').forEach(c => c.classList.remove('active'));
+            card.classList.add('active');
+            showToast(`FOV ${fovValue} selected - Set in game settings!`);
         }
         document.addEventListener('DOMContentLoaded', () => {
             initTheme();
