@@ -1312,7 +1312,7 @@
         <div class="modal-content" onclick="event.stopImmediatePropagation()">
             <div class="modal-header">
                 <span id="modalGunName">Gun with Attachments</span>
-                <button class="modal-close" onclick="closeGunModal()">×</button>
+                <button class="modal-close" onclick="closeGunModal()">&times;</button>
             </div>
             <div class="modal-img-container">
                 <img id="modalGunImg" class="modal-img" src="" alt="Attached Version">
@@ -1621,7 +1621,7 @@
     <footer class="footer">
         <div class="footer-brand">Tyrant Devs</div>
         <p> ur pasira ng sentry ay si devs pala yun gagi </p>
-        <p style="margin-top: 0.5rem; font-size: 0.85rem; opacity: 0.6;">© 2025 Tyrant Devs. All rights reserved.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.85rem; opacity: 0.6;">&copy; 2025 Tyrant Devs. All rights reserved.</p>
     </footer>
     <div class="dev-message">optimized for competitive play</div>
     <script>
@@ -1645,10 +1645,17 @@
             { name: "Locus", type: "sniper", image: "https://i.imgur.com/kQDKrmY.jpg", attach: "https://i.imgur.com/MrpMhKO.jpg", season: "Recent", description: "Bolt-action sniper", code: "Locus-2A4B5A8C9C" },
             { name: "Tundra", type: "sniper", image: "https://i.imgur.com/pLTa6zo.jpg", attach: "https://i.imgur.com/7s8o6OD.jpg", season: "Recent", description: "One-shot sniper, best for quickscoping", code: "LW3-Tundra-1A2B5A8A9E" },
             { name: "SO-14", type: "marksman", image: "https://i.imgur.com/iBafjzc.jpg", attach: "https://i.imgur.com/tJtDuR7.jpg", season: "Recent", description: "Semi-auto marksman rifle", code: "SO-14-1C2D4A8A9B" },
-            { name: "DP27", type: "lmg", image: "https://i.imgur.com/rp4J8A0.jpg", attach: "https://i.imgur.com/T1q2sC7.jpg", season: "Recent", description: "High-rate classig LMG", code: "DP27-1D2C4D5E7E" },
+            { name: "DP27", type: "lmg", image: "https://i.imgur.com/rp4J8A0.jpg", attach: "https://i.imgur.com/T1q2sC7.jpg", season: "Recent", description: "High-rate classic LMG", code: "DP27-1D2C4D5E7E" },
             { name: "Hades", type: "lmg", image: "https://i.imgur.com/eWfhNRh.jpg", attach: "https://i.imgur.com/h17R4Hh.jpg", season: "Recent", description: "High-rate classig LMG", code: "Hades-1B2B5E7A8A" },
             { name: "QXR", type: "smg", image: "https://i.imgur.com/FYHGR0s.jpg", attach: "https://i.imgur.com/5DjCqjT.jpg", season: "Recent", description: "Compact smg", code: "QXR-1C2C4D5I8A" },
-    
+            // --- NEW GUNS ADDED ---
+            { name: "Type 63", type: "ar", image: "https://i.imgur.com/4RvEY6j.jpg", attach: "https://i.imgur.com/M7rLN65.jpg", season: "Recent", description: "Tactical AR with high damage output", code: "Type 63-2B4A5B8D9A", isNew: true },
+            { name: "PKM", type: "lmg", image: "https://i.imgur.com/5QQQgjs.jpg", attach: "https://i.imgur.com/weqN5tI.jpg", season: "Recent", description: "Heavy LMG with devastating suppressive fire", code: "PKM-1A2A4A5E9B", isNew: true },
+            { name: "QQ9", type: "smg", image: "https://i.imgur.com/EsCmoqh.jpg", attach: "https://i.imgur.com/2InlfA6.jpg", season: "Recent", description: "Fast-firing SMG, excellent for rush plays", code: "QQ9-1C2C4A8C9C", isNew: true },
+            { name: "3-Line Rifle", type: "sniper", image: "https://i.imgur.com/3Kq2gQT.jpg", attach: "https://i.imgur.com/PRtHkEx.jpg", season: "Recent", description: "Classic bolt-action sniper, one-shot kill", code: "3-Line Rifle-2A4A5F7C8C", isNew: true },
+            { name: "BAL-27", type: "ar", image: "https://i.imgur.com/7AYY7yL.jpg", attach: "https://i.imgur.com/XqdAPKq.jpg", season: "Recent", description: "Advanced AR with increasing fire rate", code: "BAL-27-1C2C4A5B8A", isNew: true },
+            { name: "FSS Hurricane", type: "smg", image: "https://i.imgur.com/Fm841ac.jpg", attach: "https://i.imgur.com/RSnShKL.jpg", season: "Recent", description: "Versatile SMG with AR-like range", code: "FSS Hurricane-2A4F5B7K8C", isNew: true },
+            { name: "Pharo", type: "smg", image: "https://i.imgur.com/kd4PWzA.jpg", attach: "https://i.imgur.com/ZakyuS4.jpg", season: "Recent", description: "4-round burst SMG, deadly in close range", code: "Pharo-1E2B6A7G8B", isNew: true },
         ];
         let favorites = JSON.parse(localStorage.getItem('tyrant_favorites')) || [];
         let currentFilter = 'all';
